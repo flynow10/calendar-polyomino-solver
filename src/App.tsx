@@ -85,46 +85,51 @@ export default function App() {
 
   return (
     <div className="flex flex-row justify-evenly w-screen">
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col">
         <canvas
           ref={canvasRef}
           className="bg-white"
           width={CanvasWidth}
           height={CanvasHeight}
         ></canvas>
-        <div className="w-full flex gap-2">
-          <input
-            className="grow"
-            type="date"
-            value={`${date.getUTCFullYear()}-${(date.getUTCMonth() + 1)
-              .toString()
-              .padStart(2, "0")}-${date
-              .getUTCDate()
-              .toString()
-              .padStart(2, "0")}`}
-            onChange={(event) => {
-              let date = new Date(event.target.value);
-              if (Number.isNaN(date.getDate())) {
-                date = new Date();
-                date.setHours(0);
-              }
-              setDate(date);
-            }}
-          />
-        </div>
-        <div className="w-full flex gap-2">
-          <input
-            className="grow"
-            type="range"
-            min={0}
-            max={solutionFinder.getSolutions().length - 1}
-            step={1}
-            value={solutionIndex}
-            onChange={(event) => {
-              setSolutionIndex(event.target.valueAsNumber);
-            }}
-          />
-          <span>{solutionIndex + 1}</span>
+      </div>
+      <div className="flex flex-col gap-3">
+        <h1>Calendar Polyomino Solver</h1>
+        <input
+          className=""
+          type="date"
+          value={`${date.getUTCFullYear()}-${(date.getUTCMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${date
+            .getUTCDate()
+            .toString()
+            .padStart(2, "0")}`}
+          onChange={(event) => {
+            let date = new Date(event.target.value);
+            if (Number.isNaN(date.getDate())) {
+              date = new Date();
+              date.setHours(0);
+            }
+            setDate(date);
+          }}
+        />
+        <div className="w-full flex flex-col gap-2">
+          <h2>Solutions</h2>
+          <span>Total Count: {solutionFinder.getSolutions().length}</span>
+          <div className="w-full flex">
+            <input
+              className="grow"
+              type="range"
+              min={0}
+              max={solutionFinder.getSolutions().length - 1}
+              step={1}
+              value={solutionIndex}
+              onChange={(event) => {
+                setSolutionIndex(event.target.valueAsNumber);
+              }}
+            />
+          </div>
+          <span>Currently viewing solution: #{solutionIndex + 1}</span>
         </div>
       </div>
     </div>
