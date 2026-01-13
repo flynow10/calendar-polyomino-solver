@@ -273,8 +273,8 @@ class NodeObj {
   public Name: string = "";
   public Size: number = 0;
 
-  constructor(left: NodeObj = this, right: NodeObj = this) {
-    this.Left = left;
-    this.Right = right;
+  constructor(left?: NodeObj, right?: NodeObj) {
+    this.Left = left ?? this;
+    this.Right = right ?? this;
   }
 }
