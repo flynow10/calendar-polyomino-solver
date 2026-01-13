@@ -1,4 +1,4 @@
-import { generateLegalMoves, Move } from "./solver/brute-force";
+import { generateLegalMoves, Move } from "./solver/move-generator";
 import { PiecesList } from "./solver/pieces";
 import { Board } from "./solver/puzzle";
 const ShortPieceList = [PiecesList[9], PiecesList[4]];

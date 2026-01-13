@@ -68,6 +68,9 @@ export function createPiece(name: string, canonical: PieceOrientation): Piece {
 export function createPieceOrientations(
   canonicalOrientation: PieceOrientation
 ) {
+  // Each piece has eight possible orientations which can be found by
+  // flipping and transposing a given "canonical" orientation.
+
   const orientations: PieceOrientation[] = [];
   orientations.push(canonicalOrientation);
   orientations.push(flipVertical(canonicalOrientation));
@@ -80,6 +83,8 @@ export function createPieceOrientations(
   orientations.push(flipVertical(T));
   orientations.push(flipHorizontal(T));
   orientations.push(flipVertical(flipHorizontal(T)));
+
+  // Filtering duplicates gives us a list of the unique orientation for a piece
 
   return orientations.filter((orientation, i) => {
     return i === orientations.findIndex((a) => deepArrayEqual(a, orientation));
@@ -124,7 +129,7 @@ function flipHorizontal(matrix: number[][]) {
 
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
-      flipped[i][matrix[i].length - 1 - j] = matrix[i][j];
+      flipped[i][matrix[i].length - j - 1] = matrix[i][j];
     }
   }
 

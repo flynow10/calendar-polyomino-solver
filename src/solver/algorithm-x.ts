@@ -1,4 +1,4 @@
-import { generateLegalMoves } from "./brute-force";
+import { generateLegalMoves } from "./move-generator";
 import { PiecesList } from "./pieces";
 import { Board } from "./puzzle";
 

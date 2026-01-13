@@ -125,7 +125,7 @@ export default function App() {
               setSolutionIndex(event.target.valueAsNumber);
             }}
           />
-          <span>{solutionIndex}</span>
+          <span>{solutionIndex + 1}</span>
         </div>
       </div>
     </div>
