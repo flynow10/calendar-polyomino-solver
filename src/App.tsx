@@ -3,17 +3,15 @@ import { AllMonths, AllWeekdays, createBlockers } from "./solver/puzzle";
 import { drawBoard } from "./draw";
 import { SolutionFinder } from "./solver/algorithm-x";
 
-const CanvasWidth = Math.floor(
+const CanvasHeight = Math.floor(
   Math.min(window.innerHeight, window.innerWidth) * (2 / 3)
 );
-const CanvasHeight = CanvasWidth;
+
+const CanvasWidth = CanvasHeight * (4 / 3);
 
 export default function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // const [month, setMonth] = useState<Month>("Jan");
-  // const [weekday, setWeekday] = useState<Weekday>("Mon");
-  // const [day, setDay] = useState(1);
   const [date, setDate] = useState<Date>(() => {
     const date = new Date();
     date.setHours(0);
@@ -49,6 +47,7 @@ export default function App() {
       ctx.save();
 
       drawBoard(ctx, solutionFinder.getSolutions()[solutionIndex]);
+      // drawBoard(ctx, createBlockers({ day: 1, month: "Jan", weekday: "Mon" }));
 
       ctx.restore();
     },
@@ -118,7 +117,7 @@ export default function App() {
             className="grow"
             type="range"
             min={0}
-            max={solutionFinder.solutions.length - 1}
+            max={solutionFinder.getSolutions().length - 1}
             step={1}
             value={solutionIndex}
             onChange={(event) => {
