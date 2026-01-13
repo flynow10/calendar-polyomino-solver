@@ -1,29 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { createBlockers, Month, Weekday } from "./puzzle";
+import { AllMonths, AllWeekdays, createBlockers } from "./solver/puzzle";
 import { drawBoard } from "./draw";
-import { SolutionFinder } from "./algorithm-x";
+import { SolutionFinder } from "./solver/algorithm-x";
 
 const CanvasWidth = Math.floor(
   Math.min(window.innerHeight, window.innerWidth) * (2 / 3)
 );
 const CanvasHeight = CanvasWidth;
-
-const months: Month[] = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-const weekdays: Weekday[] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export default function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -38,8 +21,8 @@ export default function App() {
   });
 
   const day = date.getUTCDate();
-  const month = months[date.getUTCMonth()];
-  const weekday = weekdays[date.getUTCDay()];
+  const month = AllMonths[date.getUTCMonth()];
+  const weekday = AllWeekdays[date.getUTCDay()];
 
   const [solutionFinder, setSolutionFinder] = useState<SolutionFinder>(
     () => new SolutionFinder(createBlockers({ day, month, weekday }))
@@ -49,7 +32,8 @@ export default function App() {
   /**
    * @param deltaTime Time since the last frame in ms
    */
-  const onLoop = useCallback((deltaTime: number) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const onLoop = useCallback((_deltaTime: number) => {
     // Do something here
   }, []);
 
@@ -57,7 +41,8 @@ export default function App() {
    * @param deltaTime Time since the last frame in ms
    */
   const draw = useCallback(
-    (deltaTime: number) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (_deltaTime: number) => {
       if (canvasRef.current === null) return;
       const ctx = canvasRef.current.getContext("2d")!;
       ctx.clearRect(0, 0, CanvasWidth, CanvasHeight);

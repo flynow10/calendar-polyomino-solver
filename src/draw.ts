@@ -1,4 +1,4 @@
-import { Board } from "./puzzle";
+import { Board } from "./solver/puzzle";
 
 const pieceColors: { [k: string]: string } = {
   L: "#cd4444",

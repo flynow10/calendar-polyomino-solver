@@ -4,20 +4,37 @@ export type PuzzleDay = {
   month: Month;
 };
 
-export type Weekday = "Mon" | "Tue" | "Wed" | "Thu" | "Fri" | "Sat" | "Sun";
-export type Month =
-  | "Jan"
-  | "Feb"
-  | "Mar"
-  | "Apr"
-  | "May"
-  | "Jun"
-  | "Jul"
-  | "Aug"
-  | "Sep"
-  | "Oct"
-  | "Nov"
-  | "Dec";
+type ArrayElement<T extends readonly unknown[]> = T extends readonly (infer A)[]
+  ? A
+  : never;
+
+export type Weekday = ArrayElement<typeof AllWeekdays>;
+export type Month = ArrayElement<typeof AllMonths>;
+
+export const AllMonths = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+] as const;
+
+export const AllWeekdays = [
+  "Sun",
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat",
+] as const;
 
 type BoardPiece = null | string;
 export type Board = {
