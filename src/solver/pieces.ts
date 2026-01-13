@@ -6,6 +6,18 @@ export type Piece = {
 
 export type PieceOrientation = number[][];
 
+export type PieceName =
+  | "X"
+  | "F"
+  | "U"
+  | "W"
+  | "P"
+  | "N"
+  | "V"
+  | "T"
+  | "S"
+  | "L";
+
 export const PiecesList: Piece[] = [
   createPiece("X", [
     [0, 1, 0],

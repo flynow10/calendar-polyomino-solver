@@ -48,7 +48,7 @@ export default function App() {
       ctx.clearRect(0, 0, CanvasWidth, CanvasHeight);
       ctx.save();
 
-      drawBoard(ctx, solutionFinder.solutions[solutionIndex]);
+      drawBoard(ctx, solutionFinder.getSolutions()[solutionIndex]);
 
       ctx.restore();
     },

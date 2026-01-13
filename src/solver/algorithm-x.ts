@@ -5,6 +5,7 @@ import { Board } from "./puzzle";
 export class SolutionFinder {
   public board: Board;
   public solutions: Board[] = [];
+  public matrix: SparseMatrixDLX = null!;
 
   constructor(board: Board) {
     this.board = board;
@@ -14,11 +15,17 @@ export class SolutionFinder {
   public findSolutions() {
     const columnNames = this.createColumnNames();
     const matrix = this.createRows(columnNames);
-    const sparseMatrix = new SparseMatrixDLX(matrix, columnNames);
-    sparseMatrix.search(0);
-    this.solutions = sparseMatrix.solutions.map((solu) =>
-      this.convertSolutionToBoard(solu)
-    );
+    this.matrix = new SparseMatrixDLX(matrix, columnNames);
+    this.matrix.search(0);
+  }
+
+  public getSolutions() {
+    if (this.solutions.length === 0) {
+      this.solutions = this.matrix.solutions.map((solu) =>
+        this.convertSolutionToBoard(solu)
+      );
+    }
+    return this.solutions;
   }
 
   private convertSolutionToBoard(solution: string[][]): Board {
